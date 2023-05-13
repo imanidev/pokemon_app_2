@@ -4,7 +4,7 @@ class New extends React.Component {
   render() {
     const { pokemon } = this.props;
     const name = pokemon ? pokemon.name : "";
-    const img = pokemon ? pokemon.img : "";  
+    const img = pokemon ? pokemon.img : "";
 
     return (
       <div>

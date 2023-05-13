@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Pokemon App!");
 });
 
+
 //Index
 app.get("/pokemon", (req, res) => {
   Pokemon.find({}, (err, pokemon) => {
@@ -39,48 +40,52 @@ app.get("/pokemon", (req, res) => {
 });
 
 //New Page
+
 app.get("/pokemon/new", (req, res) => {
-  res.render("./New", { pokemon: Pokemon });
+
+  res.render("./New");
 });
 
 app.post("/pokemon", (req, res) => {
   const { name, img } = req.body;
   const newPokemon = new Pokemon({ name, img });
 
-  newPokemon.save((err, savedPokemon) => {
+  newPokemon.save((err) => {
+    if (err) {
+      console.error(err);
+      res.redirect("/pokemon/new");
+    } else {
+      res.redirect("/pokemon");
+    }
+  });
+});
+
+//Create Route to MongoDB
+
+app.post("/pokemon", (req, res) => {
+  Pokemon.create(req.body, (err, createdPokemon) => {
     if (err) {
       console.log(err);
     } else {
       res.redirect("/pokemon");
     }
   });
+});
 
-  //Create Route to MongoDB
+//Show Route to MongoDB
 
-  app.post("/pokemon", (req, res) => {
-    Pokemon.create(req.body, (err, createdPokemon) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.redirect("/pokemon");
-      }
-    });
+app.get("/pokemon/:id", (req, res) => {
+
+  Pokemon.findById(req.params.id, (err, foundPokemon) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("./Show", { pokemon: foundPokemon });
+    }
   });
+});
 
-  //Show Route to MongoDB
-
-  app.get("/pokemon/:id", (req, res) => {
-    Pokemon.findById(req.params.id, (err, foundPokemon) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("./Show", { pokemon: foundPokemon });
-      }
-    });
-  });
-
-  //Listener
-  app.listen(port, () => {
-    console.log(`Listening at ${port}`);
-  });
+//Listener
+app.listen(port, () => {
+  console.log(`Listening at ${port}`);
 });
