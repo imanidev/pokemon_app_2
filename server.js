@@ -16,9 +16,9 @@ db.on("open", () => console.log("mongo connected "));
 
 db.on("close", () => console.log("mongo disconnected"));
 
-// setTimeout(() => {
-//   db.close();
-// }, 5000);
+setTimeout(() => {
+  db.close();
+}, 5000);
 
 app.set("view engine", "jsx");
 app.engine("jsx", require("jsx-view-engine").createEngine());
@@ -40,13 +40,13 @@ app.get("/pokemon", (req, res) => {
 
 //New Page
 app.get("/pokemon/new", (req, res) => {
-  res.render("./New");
+  res.render("./New", { pokemon: Pokemon });
 });
 
 app.post("/pokemon", (req, res) => {
   const { name, img } = req.body;
   const newPokemon = new Pokemon({ name, img });
-  
+
   newPokemon.save((err, savedPokemon) => {
     if (err) {
       console.log(err);
@@ -54,7 +54,6 @@ app.post("/pokemon", (req, res) => {
       res.redirect("/pokemon");
     }
   });
-  
 
   //Create Route to MongoDB
 
@@ -85,4 +84,3 @@ app.post("/pokemon", (req, res) => {
     console.log(`Listening at ${port}`);
   });
 });
-
