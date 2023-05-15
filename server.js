@@ -27,7 +27,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Pokemon App!");
 });
 
-
 //Index
 app.get("/pokemon", (req, res) => {
   Pokemon.find({}, (err, pokemon) => {
@@ -42,7 +41,6 @@ app.get("/pokemon", (req, res) => {
 //New Page
 
 app.get("/pokemon/new", (req, res) => {
-
   res.render("./New");
 });
 
@@ -75,7 +73,6 @@ app.post("/pokemon", (req, res) => {
 //Show Route to MongoDB
 
 app.get("/pokemon/:id", (req, res) => {
-
   Pokemon.findById(req.params.id, (err, foundPokemon) => {
     if (err) {
       console.log(err);
