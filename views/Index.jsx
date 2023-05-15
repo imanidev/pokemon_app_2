@@ -12,6 +12,7 @@ const capitalizeFirstLetter = (string) => {
 
 class Index extends React.Component {
   render() {
+    const { pokemon } = this.props;
     return (
       <div style={myStyle}>
         <h1>Take a look at all the Pokemon!</h1>
