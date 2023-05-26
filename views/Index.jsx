@@ -24,7 +24,9 @@ class Index extends React.Component {
             const capitalizedPokemonName = capitalizeFirstLetter(singlePokemon.name);
             return (
               <li key={i}>
-                <a href={`/pokemon/${i}`}>{capitalizedPokemonName}</a>
+                <a href={`/pokemon/${singlePokemon._id}`}>{capitalizedPokemonName}
+               
+                </a>
               </li>
             );
           })}
