@@ -3,10 +3,14 @@ import pokemon from "../models/pokemon";
 
 const myStyle = {
   color: "#000000",
+  backgroundColor: "#ffffff",
 };
 
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+const capitalizeFirstLetter = (str) => {
+  if (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  return "";
 };
 
 class Show extends React.Component {
@@ -15,15 +19,14 @@ class Show extends React.Component {
   };
 
   render() {
-    const { pokemonID } = this.props;
-    const poke = pokemon[pokemonID];
-    const makeJPG = this.fixImageLink(poke.img);
+    const { pokemon } = this.props;
+    const makeJPG = this.fixImageLink(pokemon.img);
 
     return (
       <div style={myStyle}>
         <h1>Gotta Catch 'Em All!</h1>
-        <h2>{capitalizeFirstLetter(poke.name)}</h2>
-        <img src={makeJPG} alt={poke.name} />
+        <h2>{capitalizeFirstLetter(pokemon.name)}</h2>
+        <img src={makeJPG} alt={pokemon.name} />
         <button>
           <a href="/pokemon">Go back</a>
         </button>
@@ -33,3 +36,4 @@ class Show extends React.Component {
 }
 
 export default Show;
+

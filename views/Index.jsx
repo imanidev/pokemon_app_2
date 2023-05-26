@@ -1,13 +1,16 @@
 import React from "react";
-import pokemon from "../models/pokemon";
+// import pokemon from "../models/pokemon";
 
 const myStyle = {
   color: "#ffffff",
   backgroundColor: "#000000",
 };
 
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+const capitalizeFirstLetter = (str) => {
+  if (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  return "";
 };
 
 class Index extends React.Component {
@@ -17,8 +20,8 @@ class Index extends React.Component {
       <div style={myStyle}>
         <h1>Take a look at all the Pokemon!</h1>
         <ul>
-          {pokemon.map((pokemon, i) => {
-            const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
+          {pokemon.map((singlePokemon, i) => {
+            const capitalizedPokemonName = capitalizeFirstLetter(singlePokemon.name);
             return (
               <li key={i}>
                 <a href={`/pokemon/${i}`}>{capitalizedPokemonName}</a>
@@ -31,4 +34,4 @@ class Index extends React.Component {
   }
 }
 
-export default Index;
+module.exports = Index;

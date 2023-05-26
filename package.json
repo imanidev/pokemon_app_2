@@ -16,6 +16,7 @@
     "jsx-view-engine": "^0.1.0",
     "mongodb": "^5.5.0",
     "mongoose": "^6.11.1",
+    "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
 }

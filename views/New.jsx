@@ -2,19 +2,21 @@ const React = require("react");
 
 class New extends React.Component {
   render() {
-    const { pokemon } = this.props;
-    const name = pokemon ? pokemon.name : "";
-    const img = pokemon ? pokemon.img : "";
-
     return (
       <div>
         <h1>Create a New Pokemon</h1>
-        <form action="/pokemon" method="POST">
-          Name: <input type="text" name="name" value={name} />
+        <form method="POST" action="/pokemon">
+          <label>
+            Name:
+            <input type="text" name="name" />
+          </label>
           <br />
-          Img: <input type="text" name="img" value={img} />
+          <label>
+            Image URL:
+            <input type="text" name="img" />
+          </label>
           <br />
-          <input type="submit" name="" value="Create Pokemon" />
+          <button type="submit">Submit</button>
         </form>
       </div>
     );
